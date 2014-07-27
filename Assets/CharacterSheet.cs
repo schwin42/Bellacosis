@@ -6,27 +6,28 @@ using System.Collections.Generic;
 [System.Serializable]
 public enum GoalType
 {
-	None,
-	HaveSexWith,
-	Kill,
-	MakeLoveTo
+	None = 0,
+	HaveSexWith = 1,
+	TakeALife = 2,
+	MakeLoveTo = 3
 }
 
 [System.Serializable]
 public enum InformationDisposition
 {
-	None,
-	GiveTrueInformation,
-	GiveFalseInformation,
-	AvoidConversation
+	None = 0,
+	GiveTrueInformation = 1,
+	GiveFalseInformation = 2,
+	AvoidConversation = 3
 }
 
 [System.Serializable]
 public enum InterestType
 {
-	Love,
-	Women,
-	Cynicism,
+	Love = 0,
+	Women = 1,
+	Cynicism = 2,
+	Power = 3
 
 }
 #endregion

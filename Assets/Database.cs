@@ -5,6 +5,12 @@ using System.Collections.Generic;
 public enum ActionType
 {
 	None,
+	Attack,
+	Train,
+	FlirtWith,
+	AskAbout,
+	BreakUpWith,
+	InviteToGoal,
 
 }
 
