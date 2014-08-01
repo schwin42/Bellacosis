@@ -6,9 +6,11 @@ public class GameController : MonoBehaviour {
 
 	public static GameController Instance;
 
-	public float elapsedWorldTime = 0.00F;
-	public float timeConstant = 0.001F;
-	public float worldSpeed = 0F;
+	public float timeMultiplier = 0F;
+	public float elapsedWorldTime = 0F;
+	//public float elapsedWorldTime = 0.00F;
+	//public float timeConstant = 0.001F;
+	//public float worldSpeed = 0F;
 	//public float deltaWorldTime;
 
 	private List<CharacterSheetAlpha> activeCharacters;
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviour {
 	void Awake()
 	{
 		Instance = this;
+		Time.timeScale = timeMultiplier;
 	}
 
 	// Use this for initialization
@@ -24,14 +27,17 @@ public class GameController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+
+		Time.timeScale = timeMultiplier;
+		elapsedWorldTime = Time.fixedTime;
 	
-		elapsedWorldTime += timeConstant * worldSpeed;
+		//elapsedWorldTime += timeConstant * worldSpeed;
 
-		foreach(CharacterSheetAlpha character in activeCharacters)
-		{
-
-		}
+//		foreach(CharacterSheetAlpha character in activeCharacters)
+//		{
+//
+//		}
 
 	}
 

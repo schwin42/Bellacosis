@@ -129,26 +129,37 @@ public class CharacterSheetAlpha : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(GameController.Instance.worldSpeed > 0F)
+	void FixedUpdate () {
+
+
+
+		if(Time.timeScale > 0F)
 		{
 			if(activeTask.taskType == TaskType.Idle)
 			{
 				SetNextTask();
-			} else if(GameController.Instance.elapsedWorldTime - taskStartTime >= activeTask.duration)
+			} else if(Time.fixedTime - taskStartTime >= activeTask.duration)
 			{
 				SetNextTask();
-			} else {
-				switch(activeTask.taskType)
-				{
-				case TaskType.StudyPhysics:
-					physics += GameController.Instance.timeConstant * GameController.Instance.worldSpeed;
-					break;
-				case TaskType.Sleep:
-					energy += GameController.Instance.timeConstant * GameController.Instance.worldSpeed;
-					break;
-				}
+			//} else {
+
 			}
+		}
+
+		switch(activeTask.taskType)
+		{
+		case TaskType.StudyPhysics:
+			physics = Mathf.Round ((Time.fixedDeltaTime + physics)*100F)/100F;
+			
+			Debug.Log ("Physics incremented by" + Time.fixedDeltaTime + "at "+Time.fixedTime);
+			break;
+		case TaskType.Sleep:
+			energy = Mathf.Round ((Time.fixedDeltaTime + energy)*100F)/100F;
+			Debug.Log ("Energy incremented by" + Time.fixedDeltaTime + "at "+Time.fixedTime);
+			break;
+		case TaskType.Idle:
+			//Do nothing
+			break;
 		}
 	}
 
@@ -158,7 +169,8 @@ public class CharacterSheetAlpha : MonoBehaviour {
 		{
 		activeTask = taskQueue[0];
 		taskQueue.RemoveAt(0);
-		taskStartTime = GameController.Instance.elapsedWorldTime;
+		taskStartTime = Time.fixedTime;
+			Debug.Log (activeTask.taskType.ToString() + " started at "+Time.fixedTime);
 		} else {
 			activeTask = new Task(TaskType.Idle);
 		}
